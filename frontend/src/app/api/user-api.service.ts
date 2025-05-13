@@ -23,6 +23,10 @@ export class UserApiService {
 		return this.handlerRequest(this.http.get(apiConfig.user))
 	};
 
+	getUserById(userId: string) {
+		return this.handlerRequest(this.http.get(`${apiConfig.user}/${userId}`))
+	}
+
 	deleteUser(userId: string) {
 		return this.handlerRequest(this.http.delete(`${apiConfig.user}/${userId}`))
 	}
