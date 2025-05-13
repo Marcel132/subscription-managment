@@ -13,13 +13,14 @@
 	<div class="wrapper">
 		<div class="form-wrapper">
 			<h3>Logowanie</h3>
-			<form class="form">
+			<form [formGroup]="LoginGroup" class="form">
 				<div class="form-item">
 					<label for="login">Email:</label>
 					<input
 					type="email"
-					name="email"
+					name="login"
 					id="login"
+          formControlName="login"
 					>
 				</div>
 				<div class="form-item">
@@ -28,20 +29,27 @@
 					[type]="passwordType"
 					name="password"
 					id="password"
+          formControlName="password"
 					>
 					<img
-          src="./../../../assets/img/eye.svg">
+          [src]="sourceImg"
+          alt='zmień typ'
+          (click)="handlerPasswordType()"
+          >
 				</div>
-				<div class="form-item">
+				<div class="form-item consents">
 					<label for="remember-me">Zapamiętaj mnie</label>
 					<input
 					type="checkbox"
 					name="remember-me"
 					id="remember-me"
+          formControlName="rememberMe"
 					>
 				</div>
+
+        <button (click)="login()">Zaloguj</button>
 			</form>
-			<button (click)="switchView()">Nie masz konta? Zarejestruj się</button>
+			<button (click)="switchView()" class='switch-view-btn'>Nie masz konta? Zarejestruj się</button>
 		</div>
 	</div>
 
@@ -49,48 +57,53 @@
 <ng-template #RegisterTemplate>
 
 	<div class="wrapper">
-			<div class="form-wrapper">
-		<h3>Rejestracja</h3>
-		<form class="form">
-			<div class="form-item">
-				<label for="login">Email:</label>
-				<input
-				type="email"
-				name="email"
-				id="login"
-				>
-			</div>
-			<div class="form-item">
-				<label for="password">Hasło:</label>
-				<input
-				[type]="passwordType"
-				name="password"
-				id="password"
-				>
-				<img
-				[src]='sourceImg'
-				alt='Zmień'
-				(click)="handlerPasswordType()">
-			</div>
-			<div class="form-item">
-				<label for="remember-me">Zapamiętaj mnie</label>
-				<input
-				type="checkbox"
-				name="remember-me"
-				id="remember-me"
-				>
-			</div>
-			<div class="form-item">
-				<label for="accept-rules">Akcpetuję regulmin oraz zgody</label>
-				<input
-				type='checkbox'
-				name='accept-rules'
-				id='accept-rules'
-				>
-			</div>
-		</form>
-		<button (click)="switchView()">Masz konto? Zaloguj się</button>
-	</div>
+    <div class="form-wrapper">
+      <h3>Rejestracja</h3>
+      <form [formGroup]="RegisterGroup" class="form">
+        <div class="form-item">
+          <label for="login">Email:</label>
+          <input
+          type="email"
+          name="login"
+          id="login"
+          formControlName="login"
+          >
+        </div>
+        <div class="form-item">
+          <label for="password">Hasło:</label>
+          <input
+          [type]="passwordType"
+          name="password"
+          id="password"
+          formControlName="password"
+          >
+          <img
+          [src]='sourceImg'
+          alt='Zmień'
+          (click)="handlerPasswordType()">
+        </div>
+        <div class="form-item consents">
+          <label for="remember-me">Zapamiętaj mnie</label>
+          <input
+          type="checkbox"
+          name="remember-me"
+          id="remember-me"
+          formControlName="rememberMe"
+          >
+        </div>
+        <div class="form-item consents">
+          <label for="accept-rules">Akcpetuję regulmin oraz zgody</label>
+          <input
+          type='checkbox'
+          name='accept-rules'
+          id='accept-rules'
+          formControlName="acceptRules"
+          >
+        </div>
+        <button (click)="register()">Zarejestruj się</button>
+      </form>
+      <button (click)="switchView()" class='switch-view-btn'>Masz konto? Zaloguj się</button>
+	  </div>
 	</div>
 
 </ng-template>
