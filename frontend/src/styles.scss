@@ -120,6 +120,7 @@
 body {
 	font-size: 11px;
 	font-family: 'Courier New', Courier, monospace;
+	letter-spacing: .5px;
 
 	@media screen and (min-width: 400px){
 		font-size: 12px;
@@ -158,3 +159,7 @@ ul, ol, li {
 h1, h2, h3, h4, h5, h6 {
 	font-size: 1em;
 }
+
+// img {
+//   width: 25px;
+// }

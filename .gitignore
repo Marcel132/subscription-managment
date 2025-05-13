@@ -1,0 +1,8 @@
+.vscode
+angular.json
+*.spec.*
+.editorconfig
+api.routes.config.ts
+proxy.config.json
+subscription-managment.sln
+assets

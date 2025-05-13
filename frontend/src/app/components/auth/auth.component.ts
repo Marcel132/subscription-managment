@@ -19,6 +19,7 @@ export class AuthComponent {
 	}
 
 	passwordType: string = 'password'
+  sourceImg: string = './../../../assets/img/eye.svg'
 
 	constructor(
 		private usersApi: UserApiService
@@ -31,7 +32,8 @@ export class AuthComponent {
 
 
 	handlerPasswordType(){
-		this.passwordType = this.passwordType == 'password' ? 'text' : 'password'
+		this.passwordType = this.passwordType == 'password' ? 'text' : 'password';
+    this.sourceImg = this.sourceImg == './../../../assets/img/eye.svg' ? './../../../assets/img/eye.svg' : './../../../assets/img/eye-slash-fill.svg';
 	}
 	switchView() {
 		this.currentView.login = !this.currentView.login

@@ -10,8 +10,47 @@
 
 <ng-template #LoginTemplate>
 
-	<div class="form-wrapper">
-		<h3>Logowanie</h3>
+	<div class="wrapper">
+		<div class="form-wrapper">
+			<h3>Logowanie</h3>
+			<form class="form">
+				<div class="form-item">
+					<label for="login">Email:</label>
+					<input
+					type="email"
+					name="email"
+					id="login"
+					>
+				</div>
+				<div class="form-item">
+					<label for="password">Hasło:</label>
+					<input
+					[type]="passwordType"
+					name="password"
+					id="password"
+					>
+					<img
+          src="./../../../assets/img/eye.svg">
+				</div>
+				<div class="form-item">
+					<label for="remember-me">Zapamiętaj mnie</label>
+					<input
+					type="checkbox"
+					name="remember-me"
+					id="remember-me"
+					>
+				</div>
+			</form>
+			<button (click)="switchView()">Nie masz konta? Zarejestruj się</button>
+		</div>
+	</div>
+
+</ng-template>
+<ng-template #RegisterTemplate>
+
+	<div class="wrapper">
+			<div class="form-wrapper">
+		<h3>Rejestracja</h3>
 		<form class="form">
 			<div class="form-item">
 				<label for="login">Email:</label>
@@ -22,28 +61,36 @@
 				>
 			</div>
 			<div class="form-item">
-				<label for="login">Hasło:</label>
+				<label for="password">Hasło:</label>
 				<input
 				[type]="passwordType"
-				name="email"
-				id="login"
+				name="password"
+				id="password"
 				>
 				<img
-				src=''
+				[src]='sourceImg'
 				alt='Zmień'
 				(click)="handlerPasswordType()">
 			</div>
-		</form>
-		<button (click)="switchView()">Nie masz konta? Zarejestruj się</button>
-	</div>
-
-</ng-template>
-<ng-template #RegisterTemplate>
-	<div class="form-wrapper">
-		<h3>Rejestracja</h3>
-		<form class="form">
-
+			<div class="form-item">
+				<label for="remember-me">Zapamiętaj mnie</label>
+				<input
+				type="checkbox"
+				name="remember-me"
+				id="remember-me"
+				>
+			</div>
+			<div class="form-item">
+				<label for="accept-rules">Akcpetuję regulmin oraz zgody</label>
+				<input
+				type='checkbox'
+				name='accept-rules'
+				id='accept-rules'
+				>
+			</div>
 		</form>
 		<button (click)="switchView()">Masz konto? Zaloguj się</button>
 	</div>
+	</div>
+
 </ng-template>
