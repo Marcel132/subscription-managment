@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { apiConfig } from './config/api.routes.config';
 import { catchError, map, Observable, tap, throwError } from 'rxjs';
+import { RegisterModel } from '../models/register.model';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +16,7 @@ export class UserApiService {
 
 	// CRUD function
 
-	createUser(body: {}) {
+	createUser(body: RegisterModel) {
 		return this.handlerRequest(this.http.post(apiConfig.user, body))
 	};
 
@@ -36,6 +37,7 @@ export class UserApiService {
 	}
 
 	private handlerRequest<T>(observable: Observable<T>): Observable<T>{
+    console.log("Handler")
 		return observable.pipe(
 			tap(() => {
 				console.log("Request send")
