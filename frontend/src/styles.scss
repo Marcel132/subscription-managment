@@ -119,6 +119,7 @@
 
 body {
 	font-size: 11px;
+	font-family: 'Courier New', Courier, monospace;
 
 	@media screen and (min-width: 400px){
 		font-size: 12px;
@@ -135,4 +136,24 @@ body {
 	@media screen and (min-width: 1200px){
 		font-size: 16px;
 	}
+}
+
+a {
+	color: inherit;
+	opacity: .96;
+
+	&:hover {
+		cursor: pointer;
+		opacity: 1;
+	}
+}
+
+ul, ol, li {
+	text-decoration: none;
+	list-style-type: none;
+}
+
+
+h1, h2, h3, h4, h5, h6 {
+	font-size: 1em;
 }

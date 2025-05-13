@@ -1,13 +1,16 @@
 <div class="container">
 	<nav class="navigation">
 
-		<div class="logo">Subscription Managment</div>
-		<div class="navbar">
-			<ul>
-				<li><a href="">Strona główna</a></li>
-				<li><a href="">Logowanie</a></li>
-			</ul>
+		<div class="logo">
+			<h1>Subscription <span>Managment</span></h1>
 		</div>
+		<div
+		class="navbar"
+		*ngIf=" isUserLogged
+			then userLogged
+			else userNotLogged
+		"
+		></div>
 
 	</nav>
 
@@ -19,3 +22,19 @@
 
 	</footer>
 </div>
+
+
+<ng-template #userLogged>
+	<ul>
+		<li><a>Strona główna</a></li>
+		<li><a>Zarządzaj</a></li>
+		<li><a>Integracje</a></li>
+		<li><a>Konto</a></li>
+	</ul>
+</ng-template>
+<ng-template #userNotLogged>
+	<ul>
+		<li><a>Strona główna</a></li>
+		<li><a>Logowanie</a></li>
+	</ul>
+</ng-template>
