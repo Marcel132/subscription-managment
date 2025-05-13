@@ -26,15 +26,15 @@
 
 <ng-template #userLogged>
 	<ul>
-		<li><a>Strona główna</a></li>
-		<li><a>Zarządzaj</a></li>
-		<li><a>Integracje</a></li>
-		<li><a>Konto</a></li>
+		<li><a [routerLink]="['']">Strona główna</a></li>
+		<li><a [routerLink]="['manage']">Zarządzaj</a></li>
+		<li><a [routerLink]="['integrations']">Integracje</a></li>
+		<li><a [routerLink]="['account']">Konto</a></li>
 	</ul>
 </ng-template>
 <ng-template #userNotLogged>
 	<ul>
-		<li><a>Strona główna</a></li>
-		<li><a>Logowanie</a></li>
+		<li><a [routerLink]="['']">Strona główna</a></li>
+		<li><a [routerLink]="['auth']">Logowanie</a></li>
 	</ul>
 </ng-template>

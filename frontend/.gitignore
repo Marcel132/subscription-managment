@@ -46,3 +46,4 @@ Thumbs.db
 angular.json
 *.spec.*
 .editorconfig
+api.routes.config.ts
