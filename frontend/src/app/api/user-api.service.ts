@@ -19,7 +19,7 @@ export class UserApiService {
 		return this.handlerRequest(this.http.post(apiConfig.user, body))
 	};
 
-	getUser() {
+	getUsers() {
 		return this.handlerRequest(this.http.get(apiConfig.user))
 	};
 
