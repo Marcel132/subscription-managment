@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { UserApiService } from '../../api/user-api.service';
+import { firstValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-auth',
@@ -8,4 +10,12 @@ import { Component } from '@angular/core';
 })
 export class AuthComponent {
 
+	constructor(
+		private usersApi: UserApiService
+	) {}
+
+
+	getUsers(){
+		firstValueFrom(this.usersApi.getUsers())
+	}
 }
