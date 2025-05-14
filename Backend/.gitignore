@@ -3,3 +3,5 @@
 /bin
 *.Development.*
 Program.cs
+appsettings.json
+Migrations
