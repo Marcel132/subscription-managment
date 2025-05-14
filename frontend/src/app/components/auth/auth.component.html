@@ -4,7 +4,8 @@
 
 <ng-template #checkRegister>
   <ng-container *ngIf="currentView.register">
-    <ng-container *ngTemplateOutlet="RegisterTemplate"></ng-container>
+    <ng-container *ngTemplateOutlet="RegisterTemplate">
+    </ng-container>
   </ng-container>
 </ng-template>
 
@@ -51,6 +52,22 @@
 			</form>
 			<button (click)="switchView()" class='switch-view-btn'>Nie masz konta? Zarejestruj się</button>
 		</div>
+    <div class="response-handler">
+      <!-- Ładowanie -->
+      <div *ngIf="responseHandler.isLoading" class="loading">
+        <p>{{ responseHandler.isLoadingMessage }}</p>
+      </div>
+
+      <!-- Sukces -->
+      <div *ngIf="responseHandler.responseState" class="success">
+        <p>{{ responseHandler.responseMessage }}</p>
+      </div>
+
+      <!-- Błąd -->
+      <div *ngIf="responseHandler.errorState" class="error">
+        <p>{{ responseHandler.errorMessage }}</p>
+      </div>
+    </div>
 	</div>
 
 </ng-template>
@@ -92,7 +109,7 @@
           >
         </div>
         <div class="form-item consents">
-          <label for="accept-rules">Akcpetuję regulmin oraz zgody</label>
+          <label for="accept-rules">Akcpetuję regulmin oraz zgody *wymagane</label>
           <input
           type='checkbox'
           name='accept-rules'
@@ -104,6 +121,22 @@
       </form>
       <button (click)="switchView()" class='switch-view-btn'>Masz konto? Zaloguj się</button>
 	  </div>
+    <div class="response-handler">
+      <!-- Ładowanie -->
+      <div *ngIf="responseHandler.isLoading" class="loading">
+        <p>{{ responseHandler.isLoadingMessage }}</p>
+      </div>
+
+      <!-- Sukces -->
+      <div *ngIf="responseHandler.responseState" class="success">
+        <p>{{ responseHandler.responseMessage }}</p>
+      </div>
+
+      <!-- Błąd -->
+      <div *ngIf="responseHandler.errorState" class="error">
+        <p>{{ responseHandler.errorMessage }}</p>
+      </div>
+    </div>
 	</div>
 
 </ng-template>

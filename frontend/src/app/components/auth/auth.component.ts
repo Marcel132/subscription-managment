@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
 import { UserApiService } from '../../api/user-api.service';
-import { catchError, firstValueFrom, map, tap, throwError } from 'rxjs';
+import { firstValueFrom } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RegisterModel } from '../../models/register.model';
+import { ResponseHandler } from '../../models/response-handler.model';
+import { ValidationService } from '../../services/validation.service';
 
 @Component({
   selector: 'app-auth',
@@ -27,20 +29,30 @@ export class AuthComponent {
   LoginGroup: FormGroup<any>
   RegisterGroup: FormGroup<any>
 
+  responseHandler: ResponseHandler = {
+    responseState: false,
+    responseMessage: null,
+    errorState: false,
+    errorMessage: null,
+    isLoading: false,
+    isLoadingMessage: null
+  }
+
 
 	constructor(
 		private usersApi: UserApiService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private validationService: ValidationService,
 	) {
     this.LoginGroup = this.fb.group({
-      login: [null, [Validators.required, Validators.email]],
+      login: [null, [Validators.required]],
       password: [null, [Validators.required, Validators.minLength(10)]],
       rememberMe: [false]
     })
 
     this.RegisterGroup = this.fb.group({
-      login: [null, [Validators.required, Validators.email]],
-      password: [null, [Validators.required, Validators.minLength(10)]],
+      login: [null, [Validators.required]],
+      password: [null, [Validators.required]],
       rememberMe: [false],
       acceptRules: [false, Validators.required]
     })
@@ -57,15 +69,44 @@ export class AuthComponent {
   }
 
   async register(){
-    const body: RegisterModel = {
-      login: this.RegisterGroup.value.login,
-      password: this.RegisterGroup.value.password,
-      rememberMe: this.RegisterGroup.value.rememberMe,
-      acceptRules: this.RegisterGroup.value.acceptRules
+    this.responseHandler = { responseState: false, responseMessage: null, errorState: false, errorMessage: null, isLoading: false, isLoadingMessage: null }
+    const body: RegisterModel = this.RegisterGroup.value
+
+    const validEmail = this.validationService.validateEmail(body.login)
+    const validPassword = this.validationService.validatePassword(body.password)
+    const validCheckbox = this.validationService.validateCheckbox(body.acceptRules)
+
+    if(!validEmail.state){
+      this.responseHandler.errorState = true; this.responseHandler.errorMessage = validEmail.message
+      return
     }
 
-    await firstValueFrom(this.usersApi.createUser(body))
+    if(!validPassword.state){
+      this.responseHandler.errorState = true; this.responseHandler.errorMessage = validPassword.message;
+      return
+    }
 
+    if(!validCheckbox.state){
+      this.responseHandler.errorState = true; this.responseHandler.errorMessage = validCheckbox.message;
+      return
+    }
+
+    try {
+      this.responseHandler.isLoading = true;
+      this.responseHandler.isLoadingMessage = `[Rejestracja...]`
+
+      const response = await firstValueFrom(this.usersApi.createUser(body).pipe())
+
+      setTimeout(()=> {
+        this.responseHandler = { responseState: true, responseMessage: `Zarejestrowano użytkownika o emailu: ${body.login}`, errorState: false, errorMessage: null, isLoading: false, isLoadingMessage: null }
+      }, 1500 )
+
+    }
+    catch(error){
+
+    }
+    finally {
+    }
   }
 
 
